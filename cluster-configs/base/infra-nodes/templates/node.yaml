@@ -1,0 +1,18 @@
+{{- range $key, $value := .Values.nodes }}
+{{ if eq ( $value.enabled | toString) "true" }}
+---
+kind: Node
+apiVersion: v1
+metadata:
+  name: {{ $value.name | quote }}
+  labels:
+    {{- range $key_custom_label, $value_custom_label := $value.custom_labels }}
+    {{ $key_custom_label }}: {{ $value_custom_label | quote }}
+    {{- end }}
+  finalizers:
+    - kubernetes
+spec:
+  taints: {{- toYaml $value.taints | nindent 4 }}
+{{- end }}
+{{- end }}
+

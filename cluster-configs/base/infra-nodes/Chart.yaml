@@ -1,0 +1,4 @@
+apiVersion: v2
+description: Using Server Side Apply to put labels and taints on the worker nodes 
+name: Node-GitOps
+version: 1.0.0
