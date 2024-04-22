@@ -1,0 +1,8 @@
+---
+
+cluster:
+  name: ocp1
+  env: dev
+
+msTeams:
+  enabled: false

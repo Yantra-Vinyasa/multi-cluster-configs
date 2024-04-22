@@ -1,0 +1,14 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: odf4registry
+  namespace: openshift-image-registry
+spec:
+  accessModes:
+  - ReadWriteOnly
+  resources:
+    requests:
+      storage: 200Gi
+  volumeMode: Filesystem
+

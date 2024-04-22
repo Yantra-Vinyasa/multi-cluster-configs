@@ -1,0 +1,9 @@
+---
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: asgard
+  namespace: openshift-logging
+spec:
+  generateBucketName: asgard
+  storageClassName: ocs-storagecluster-ceph-rgw

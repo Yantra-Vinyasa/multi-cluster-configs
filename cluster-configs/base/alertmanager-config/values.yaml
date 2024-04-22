@@ -1,0 +1,7 @@
+alertConfig:
+  enabled: true
+
+msTeams:
+  enabled: false
+  webhookUrl:
+  connector: openshift-to-teams

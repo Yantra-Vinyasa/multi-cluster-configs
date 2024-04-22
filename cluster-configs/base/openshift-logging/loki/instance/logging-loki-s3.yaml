@@ -1,0 +1,13 @@
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: logging-loki-s3
+  namespace: openshift-logging
+data:
+  access_key_id: 'MTIzNDU2Nzg5MA==' # Example base64 encoded value for '1234567890'
+  access_key_secret: 'YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXo=' # Example base64 encoded value for 'abcdefghijklmnopqrstuvwxyz'
+  bucketnames: 'YnVja2V0X25hbWVzCg==' # Example base64 encoded value for 'bucket_names'
+  endpoint: 'aHR0cHM6Ly9leGFtcGxlLmNvbTo0NDMK' # Example base64 encoded value for 'https://example.com:443'
+  region: 'ZXhhbXBsZV9yZWdpb24=' # Example base64 encoded value for 'example_region'
+type: Opaque

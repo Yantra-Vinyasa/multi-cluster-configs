@@ -1,0 +1,25 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- loki/resources/namespace.yaml
+- loki/resources/role.yaml
+- loki/resources/rolebinding.yaml
+
+- loki/operator/operatorgroup.yaml
+- loki/operator/subscription.yaml
+
+- loki/instance/lokistack.yaml
+- loki/instance/logging-loki-s3.yaml
+
+
+- cluster-logging/resources/namespace.yaml
+
+- cluster-logging/operator/operatorgroup.yaml
+- cluster-logging/operator/subscription.yaml
+
+- cluster-logging/instance/clusterlogging.yaml
+
+
+- s3-bucket/obc.yaml

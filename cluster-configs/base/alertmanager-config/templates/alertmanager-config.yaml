@@ -1,0 +1,83 @@
+{{ if .Values.alertConfig.enabled }}
+---
+apiVersion: v1
+stringData:
+  alertmanager.yaml: |
+    route:
+      group_by: [alertname]
+      group_wait: 10s
+      group_interval: 5m
+      repeat_interval: 2h
+      #receiver: "openshift-to-email"
+      routes:
+      {{ if .Values.msTeams.enabled }}
+        - matchers:
+          - severity=~"alert|high|info|warning|critical"
+          receiver: openshift-to-teams
+        - matchers:
+          - severity: critical
+          receiver: "openshift-to-email"
+      {{ else }}
+        - matchers:
+          - severity="critical"
+          receiver: openshift-to-email
+      {{- end }}
+        - matchers:
+          - severity="none"
+          receiver: blackhole
+    templates:
+      - '/etc/alertmanager/config/email.tmpl'
+
+    receivers:
+      - name: blackhole
+
+      - name: openshift-to-email
+        email_configs:
+          - to: suresh@example.com
+            from: openshift-noreply@example.com
+            smarthost: 'smtp.example.com:25'
+            require_tls: false
+            send_resolved: true
+            headers:
+              subject: '{{"{{"}} template "custom_mail_subject" . {{"}}"}}'
+            html: '{{"{{"}} template "custom_mail_html" . {{"}}"}}'
+
+      {{ if .Values.msTeams.enabled }}
+      - name: openshift-to-teams
+        webhook_configs:
+        - url: 'http://prometheus-msteams:2000/{{ .Values.msTeams.connector }}'
+      {{- end }}
+
+  email.tmpl: |
+    {{`{{ define "custom_mail_subject" -}}`}}
+    {{`{{ if eq .Status "firing" -}}`}}
+    🔥{{ .Values.cluster.name }} [{{`{{ .CommonLabels.alertname }}] {{ .CommonLabels.instance }} is {{ .Status }}`}}!
+    {{`{{- else -}}`}}
+    ✅ {{ .Values.cluster.name }} [{{`{{ .CommonLabels.alertname }}] {{ .CommonLabels.instance }} is {{ .Status }}`}}!
+    {{`{{- end }}`}}
+    {{`{{- end }}`}}
+
+    {{`{{ define "custom_mail_html" -}}`}}
+    Cluster: {{ .Values.cluster.name }}<br>
+    Environment: {{ .Values.cluster.env }}<br>
+    Number of alerts: {{`{{ len .Alerts }}`}} <br><br>
+
+    {{`{{ range .Alerts }}`}}
+    Alert Name: {{`{{ .Labels.alertname }}`}}<br>
+    Severity: {{`{{ .Labels.severity }}`}}<br>
+    Namespace: {{`{{ .Labels.namespace }}`}}<br>
+    {{`{{ if .Annotations.description -}}`}}
+    Description: {{`{{ .Annotations.description }}`}}<br>
+    {{`{{ end }}`}}
+    {{`{{ if .Annotations.message -}}`}}
+    Message: {{`{{ .Annotations.message }}`}}<br>
+    {{`{{ end }}`}}
+    <br>
+    {{`{{ end -}}`}}
+    {{`{{- end }}`}}
+kind: Secret
+metadata:
+  name: alertmanager-main
+  namespace: openshift-monitoring
+type: Opaque
+{{- end }}

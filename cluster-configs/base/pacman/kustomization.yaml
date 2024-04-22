@@ -1,0 +1,9 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: example-1
+
+resources:
+- resources/namespace.yaml
+- resources/pacman.yaml
+- resources/mongodb.yaml

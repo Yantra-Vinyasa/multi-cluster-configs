@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: pacman
+  name: pacman
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: pacman
+  template:
+    metadata:
+      labels:
+        name: pacman
+    spec:
+      containers:
+      - image: quay.io/jpacker/nodejs-pacman-app:latest
+        name: pacman
+        ports:
+        - containerPort: 8080
+          name: http-server
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: pacman
+  labels:
+    app.kubernetes.io/name: pacman
+spec:
+  path: "/"
+  to:
+    kind: Service
+    name: pacman
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pacman
+  labels:
+    name: pacman
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    name: pacman

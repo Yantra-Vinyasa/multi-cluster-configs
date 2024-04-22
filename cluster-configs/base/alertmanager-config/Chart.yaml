@@ -1,0 +1,4 @@
+apiVersion: v2
+name: alertmanager-config
+description: A Helm chart for setting up the alertmanager configuration for the clusters
+version: 0.1.0

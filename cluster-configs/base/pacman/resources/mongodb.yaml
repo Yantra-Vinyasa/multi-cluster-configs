@@ -1,0 +1,56 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: mongo
+  name: mongo
+  namespace: pacman
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: mongo
+  template:
+    metadata:
+      labels:
+        name: mongo
+    spec:
+      containers:
+      - image: bitnami/mongodb:5.0.9
+        name: mongo
+        ports:
+        - name: mongo
+          containerPort: 27017
+        volumeMounts:
+          - name: mongo-db
+            mountPath: /bitnami
+      volumes:
+        - name: mongo-db
+          persistentVolumeClaim:
+            claimName: mongo-storage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: mongo
+  name: mongo
+spec:
+  type: ClusterIP
+  ports:
+    - port: 27017
+      targetPort: 27017
+  selector:
+    name: mongo
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mongo-storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
