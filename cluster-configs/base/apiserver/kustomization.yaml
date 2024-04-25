@@ -4,4 +4,4 @@ kind: Kustomization
 
 resources:
   - resources/apiserver.yaml
-  # - resources/vault-ingress-secret.yaml # Sealed-secret, vault secret etc for the certificate
+  # - resources/vault-api-secret.yaml # Sealed-secret, vault secret etc for the certificate
