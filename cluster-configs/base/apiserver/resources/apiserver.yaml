@@ -1,0 +1,14 @@
+---
+apiVersion: config.openshift.io/v1
+kind: APIServer
+metadata:
+  name: cluster
+spec:
+  servingCerts:
+    namedCertificates:
+      - names:
+          - PATCH-ME
+        servingCertificate:
+          name: api-certificate
+  encryption:
+    type: aesgcm
