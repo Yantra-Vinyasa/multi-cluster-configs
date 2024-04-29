@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    scheduler.alpha.kubernetes.io/defaultTolerations: '[{"operator": "Exists"}]'
+  labels:
+    kubernetes.io/metadata.name: openshift-debug
+  name: openshift-debug
+spec:
+  finalizers:
+  - kubernetes
