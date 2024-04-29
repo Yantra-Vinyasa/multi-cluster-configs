@@ -1,0 +1,16 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: openshift-storage
+
+resources:
+  - operator/ns.yaml
+  - operator/sub.yaml
+  - operator/opergroup.yaml
+  - operator/odf-console-plugin.yaml
+  - operator/enable-console-plugin-sa.yaml
+  - operator/enable-console-plugin-rbac.yaml
+  - operator/enable-console-plugin-job.yaml
+  - operator/network-attachment-def.yaml
+  - instance/storage-cluster.yaml

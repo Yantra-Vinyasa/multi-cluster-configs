@@ -1,4 +1,4 @@
 ---
 - op: replace
   path: /spec/servingCerts/namedCertificates/0/names/0
-  value: api.r6-ocp-mgmthub.itd.lmt.lv
+  value: api.hello
