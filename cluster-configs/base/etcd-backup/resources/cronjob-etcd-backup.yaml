@@ -1,0 +1,64 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: etcd-backup
+  namespace: etcd-backup
+spec:
+  schedule: "0 0 * * *"
+  concurrencyPolicy: "Replace"
+  suspend: false
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            parent: "etcd-backup"
+        spec:
+          restartPolicy: Never
+          hostPID: true
+          hostNetwork: true
+          containers:
+            - name: container-00
+              command:
+                - /bin/bash
+                - -c
+                - >
+                 mkdir -p /host/tmp/backup &&
+                 touch /host/tmp/backup/init.txt &&
+                 rm /host/tmp/backup/* &&
+                 chroot /host /usr/local/bin/cluster-backup.sh /tmp/backup &&
+                 aws ${AWS_CLI_OPTIONS} s3 cp --recursive /host/tmp/backup s3://${AWS_BUCKET_ID} &&
+                 echo Purging old files... &&
+                 ((aws ${AWS_CLI_OPTIONS} s3 ls ${AWS_BUCKET_ID}; date -d "5 days ago" +"%Y-%m-%d 00:00:00 DELETETOHERE")|sort -k1|sed -n '/DELETETOHERE/q;p'|awk '{print $4}'|xargs -I '{}' aws ${AWS_CLI_OPTIONS} s3 rm s3://${AWS_BUCKET_ID}/'{}')
+              envFrom:
+                - secretRef:
+                    name: s3-credentials
+              securityContext:
+                privileged: true
+                runAsUser: 0
+              imagePullPolicy: IfNotPresent
+              volumeMounts:
+                - name: host
+                  mountPath: /host
+                - name: trusted-ca-bundle
+                  readOnly: true
+                  mountPath: /etc/pki/ca-trust/extracted/pem
+              image: quay.io/redhat-cop/tool-box:latest
+          hostIPC: true
+          serviceAccount: etcd-backup
+          serviceAccountName: etcd-backup
+          volumes:
+            - name: host
+              hostPath:
+                path: /
+                type: Directory
+            - name: trusted-ca-bundle
+              configMap:
+                name: trusted-ca-bundle
+                items:
+                  - key: ca-bundle.crt
+                    path: tls-ca-bundle.pem
+                defaultMode: 420
