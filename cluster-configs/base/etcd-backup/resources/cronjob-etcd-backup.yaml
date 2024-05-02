@@ -26,6 +26,7 @@ spec:
                 - /bin/bash
                 - -c
                 - >
+                 export AWS_CA_BUNDLE=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem &&
                  mkdir -p /host/tmp/backup &&
                  touch /host/tmp/backup/init.txt &&
                  rm /host/tmp/backup/* &&
