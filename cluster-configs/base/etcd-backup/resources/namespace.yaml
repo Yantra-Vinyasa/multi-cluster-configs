@@ -8,4 +8,10 @@ metadata:
     pod-security.kubernetes.io/enforce: privileged
     pod-security.kubernetes.io/warn: privileged
     security.openshift.io/scc.podSecurityLabelSync: 'false'
+  annotations:
+    openshift.io/node-selector: 'node-role.kubernetes.io/master='
+    scheduler.alpha.kubernetes.io/defaultTolerations: >-
+      [{"operator": "Exists", "effect": "NoSchedule", "key":
+      "node-role.kubernetes.io/master"}
+      ]
 spec: {}
