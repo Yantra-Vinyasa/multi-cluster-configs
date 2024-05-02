@@ -59,4 +59,15 @@ applications:
       argocd.argoproj.io/sync-wave: '10'
     source:
       path: cluster-configs/overlays/dev/chrony
-
+  
+  etcd-backup:
+    annotations:
+      argocd.argoproj.io/sync-wave: '15'
+    source:
+      path: overlays/dev/etcd-backup
+    extraFields: |
+      ignoreDifferences:
+        - name: trusted-ca-bundle
+          kind: ConfigMap
+          jsonPointers:
+          - /data
