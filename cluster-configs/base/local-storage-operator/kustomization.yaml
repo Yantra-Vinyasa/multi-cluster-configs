@@ -4,3 +4,4 @@ resources:
 - instance/local-volume-set.yaml
 - operator/operator-group.yaml
 - operator/subs.yaml
+- operator/namespace.yaml
