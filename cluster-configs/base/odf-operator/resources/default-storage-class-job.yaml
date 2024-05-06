@@ -1,0 +1,41 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: default-storage-class-set
+  generateName: default-storage-class-set-
+  annotations:
+    argocd.argoproj.io/sync-wave: "15"
+spec:
+  template:
+    spec:
+      containers:
+        - name: labeler
+          image: registry.redhat.io/openshift4/ose-cli
+          env:
+            - name: STORAGE_CLASS
+              value: 'ocs-storagecluster-ceph-rbd'
+          command:
+            - /bin/bash
+            - -c
+            - |
+                echo "Attempting to set default StorageClass : ${STORAGE_CLASS} "
+                echo ""
+
+                INSTALLED_CLASSES=$(oc get storageclasses.storage.k8s.io -o=jsonpath='{.items[*].metadata.name}')
+                echo "Current storage classes:"
+                echo ${INSTALLED_CLASSES}
+
+                # Check default storage classes
+                CURRENT_STATE=$(oc get storageclasses.storage.k8s.io $STORAGE_CLASS -o=jsonpath='{.metadata.annotations.storageclass\.kubernetes\.io/is-default-class}')
+
+                if [[ "${CURRENT_STATE}" == *true* ]]; then
+                    echo "Already enabled default StorageClass: ${STORAGE_CLASS}"
+                else
+                    echo "Setting default StorageClass: ${STORAGE_CLASS}"
+                    oc patch storageclass $STORAGE_CLASS -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
+                fi
+      restartPolicy: Never
+      serviceAccount: default-storage-class-set
+      serviceAccountName: default-storage-class-set
+  backoffLimit: 4

@@ -1,0 +1,27 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: default-storage-class-set
+rules:
+  - apiGroups: ["storage.k8s.io"]
+    resources:
+      - storageclasses
+    verbs:
+      - get
+      - list
+      - patch
+      - label
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: default-storage-class-set
+subjects:
+  - kind: ServiceAccount
+    name: default-storage-class-set
+    namespace: openshift-storage
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: default-storage-class-set

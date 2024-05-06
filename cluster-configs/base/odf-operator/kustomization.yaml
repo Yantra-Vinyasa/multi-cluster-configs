@@ -13,4 +13,9 @@ resources:
   - operator/enable-console-plugin-rbac.yaml
   - operator/enable-console-plugin-job.yaml
   - operator/network-attachment-def.yaml
+
   - instance/storage-cluster.yaml
+  
+  - resources/default-storage-class-job.yaml
+  - resources/default-storage-class-sa.yaml
+  - resources/default-storage-class-rbac.yaml
