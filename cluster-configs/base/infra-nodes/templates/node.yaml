@@ -4,6 +4,8 @@
 kind: Node
 apiVersion: v1
 metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
   name: {{ $value.name | quote }}
   labels:
     {{- range $key_custom_label, $value_custom_label := $value.custom_labels }}
