@@ -25,6 +25,12 @@ spec:
                 INSTALLED_CLASSES=$(oc get storageclasses.storage.k8s.io -o=jsonpath='{.items[*].metadata.name}')
                 echo "Current storage classes:"
                 echo ${INSTALLED_CLASSES}
+                
+                # Check if the specified StorageClass exists, if not then sleep for 5 minutes 
+                if [[ ! "${INSTALLED_CLASSES}" =~ "${STORAGE_CLASS}" ]]; then
+                echo "Error: StorageClass ${STORAGE_CLASS} not found."
+                sleep 300
+                fi
 
                 # Check default storage classes
                 CURRENT_STATE=$(oc get storageclasses.storage.k8s.io $STORAGE_CLASS -o=jsonpath='{.metadata.annotations.storageclass\.kubernetes\.io/is-default-class}')
