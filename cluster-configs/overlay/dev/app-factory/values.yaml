@@ -11,7 +11,7 @@ default:
       namespace: openshift-gitops
       server: https://kubernetes.default.svc
     source:
-      repoURL: https://my-gitlab.example.com
+      repoURL: git@github.com:Yantra-Vinyasa/multi-cluster-configs.git
       targetRevision: main
 
 projects:
@@ -21,7 +21,7 @@ projects:
     description: Project for overall cluster configuration
     namespace: openshift-gitops
     sourceRepos:
-    - https://my-gitlab.example.com/openshift-config.git
+    - git@github.com:Yantra-Vinyasa/multi-cluster-configs.git
     destinations: |
       - namespace: '*'
         server: https://kubernetes.default.svc
