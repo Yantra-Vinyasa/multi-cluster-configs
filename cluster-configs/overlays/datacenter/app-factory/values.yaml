@@ -22,7 +22,8 @@ projects:
     description: Project for overall cluster configuration
     namespace: openshift-gitops
     sourceRepos:
-    - https://github.com/shebistar/multi-cluster-configs.git
+#    - https://github.com/shebistar/multi-cluster-configs.git
+    - '*'
     destinations: |
       - namespace: '*'
         server: https://kubernetes.default.svc
@@ -54,7 +55,6 @@ applications:
       argocd.argoproj.io/sync-wave: '3'
     source:
       path: cluster-configs/overlays/datacenter/pacman
-      targetRevision: shebi-multicloud-demo
 
 #  chrony:
 #    annotations:
