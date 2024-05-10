@@ -33,6 +33,10 @@ spec:
   to:
     kind: Service
     name: pacman
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
 ---
 apiVersion: v1
 kind: Service
