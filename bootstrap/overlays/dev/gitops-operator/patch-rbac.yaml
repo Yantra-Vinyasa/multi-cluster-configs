@@ -1,0 +1,6 @@
+---
+- op: replace
+  path: /spec/rbac/policy
+  value: |
+        g, cdc-admin, role:admin
+        g, system:cluster-admins, role:admin
