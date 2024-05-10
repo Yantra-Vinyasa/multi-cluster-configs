@@ -54,7 +54,7 @@ applications:
     annotations:
       argocd.argoproj.io/sync-wave: '3'
     source:
-      path: cluster-configs/overlays/datacenter/pacman
+      path: cluster-configs/overlays/aro/pacman
 
 #  chrony:
 #    annotations:

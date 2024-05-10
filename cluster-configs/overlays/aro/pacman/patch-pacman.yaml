@@ -2,3 +2,12 @@
 - op: replace
   path: /spec/replicas
   value: 2
+
+- op: replace
+  path: /metadata/labels/cloud
+  value: aro
+
+- op: replace
+  path: /metadata/labels/zone
+  value: northeurope
+

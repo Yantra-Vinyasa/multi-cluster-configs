@@ -59,7 +59,15 @@ change the values of the `targetRevision`, `repoURL`, and `path` on the `appofap
 3. Make sure the GitOps operator version is the latest in file `patch-sub-channel.yaml` --> `value`
 
 
-4. run on the `overlay/{env}/gitops-operator` folder: 
+# Install App of Apps
+
+1. Use the overlay folder relevant to your environment in the multi-cluster-configs/cluster-configs/overlays/{env}/app-factory.
+
+2. Check the values of the `repoURL`, `targetRevision`, and `applications.pacman.source.path`, update if necessary.
+
+3. There are other applications commented out in the same file, uncomment if you want to use them.
+
+4. run on the `multi-cluster-configs/bootstrap/overlays/{env}/gitops-operator` folder:
 
 $ kustomize build|oc apply -f -
 
