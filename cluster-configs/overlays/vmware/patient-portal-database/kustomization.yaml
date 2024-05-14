@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+#namespace: example-1 # Use this field to overwrite namespace for the manifests
+resources:
+  - "../../../base/patient-portal-database/"
+
+# Patch the application to change the cluster specific details
+patches:
+- path: patch-patient-portal-database-deployment.yaml
+  target:
+    kind: Deployment
+    name: patient-portal-database
+    version: v1
+
+- path: patch-patient-portal-database-service.yaml
+  target:
+    kind: Service
+    name: patient-portal-database
+    version: v1

@@ -1,4 +1,0 @@
----
-- op: replace
-  path: /spec/limits/global/retention/days
-  value: 2

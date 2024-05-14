@@ -4,10 +4,9 @@
   value: 2
 
 - op: replace
-  path: /metadata/labels/cloud
-  value: aro
+  path: /metadata/cloud
+  value: gcp
 
 - op: replace
-  path: /metadata/labels/zone
+  path: /metadata/zone
   value: northeurope
-

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-processor
+  namespace: patient-portal-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payment-processor
+  template:
+    metadata:
+      labels:
+        app: payment-processor
+    spec:
+      hostname: payment-processed-at-private-cluster  # Add the hostname here
+      containers:
+        - name: payment-processor
+          image: quay.io/redhatintegration/patient-portal-payment-processor:devnation
+          ports:
+            - containerPort: 8080

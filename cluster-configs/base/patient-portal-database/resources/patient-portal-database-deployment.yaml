@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patient-portal-database
+  namespace: patient-portal-database
+spec:
+  selector:
+    matchLabels:
+      app: patient-portal-database
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: patient-portal-database
+        cloud: cloud-changeme
+        zone: zone-changeme
+    spec:
+      containers:
+        - name: patient-portal-database
+          image: quay.io/redhatintegration/patient-portal-database:devnation
+          ports:
+            - containerPort: 5432

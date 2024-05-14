@@ -1,0 +1,8 @@
+---
+- op: replace
+  path: /metadata/cloud
+  value: gcp
+
+- op: replace
+  path: /metadata/zone
+  value: northeurope

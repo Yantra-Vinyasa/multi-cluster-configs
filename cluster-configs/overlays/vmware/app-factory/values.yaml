@@ -54,20 +54,20 @@ applications:
     annotations:
       argocd.argoproj.io/sync-wave: '3'
     source:
-      path: cluster-configs/overlays/gcp/pacman
+      path: cluster-configs/overlays/vmware/pacman
 
 
   patient-portal-frontend:
     annotations:
       argocd.argoproj.io/sync-wave: '3'
     source:
-      path: cluster-configs/overlays/gcp/patient-portal-frontend
+      path: cluster-configs/overlays/vmware/patient-portal-frontend
 
   patient-portal-database:
     annotations:
       argocd.argoproj.io/sync-wave: '3'
     source:
-      path: cluster-configs/overlays/gcp/patient-portal-database
+      path: cluster-configs/overlays/vmware/patient-portal-database
 
 
 #  chrony:

@@ -1,0 +1,11 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: patient-portal-database
+
+resources:
+- resources/namespace.yaml
+- resources/patient-portal-database-deployment.yaml
+- resources/patient-portal-database-service.yaml
+- resources/payment-processor-deployment.yaml
+- resources/payment-processor-service.yaml

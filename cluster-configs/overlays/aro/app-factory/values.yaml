@@ -56,6 +56,20 @@ applications:
     source:
       path: cluster-configs/overlays/aro/pacman
 
+
+  patient-portal-frontend:
+    annotations:
+      argocd.argoproj.io/sync-wave: '3'
+    source:
+      path: cluster-configs/overlays/aro/patient-portal-frontend
+
+  patient-portal-database:
+    annotations:
+      argocd.argoproj.io/sync-wave: '3'
+    source:
+      path: cluster-configs/overlays/aro/patient-portal-database
+
+
 #  chrony:
 #    annotations:
 #      argocd.argoproj.io/sync-wave: '10'

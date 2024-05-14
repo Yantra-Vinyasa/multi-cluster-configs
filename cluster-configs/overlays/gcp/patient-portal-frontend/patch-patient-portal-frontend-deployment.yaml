@@ -1,0 +1,12 @@
+---
+- op: replace
+  path: /spec/replicas
+  value: 2
+
+- op: replace
+  path: /metadata/cloud
+  value: gcp
+
+- op: replace
+  path: /metadata/zone
+  value: region1
