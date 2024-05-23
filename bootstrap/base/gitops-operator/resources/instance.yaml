@@ -7,6 +7,11 @@ metadata:
   name: openshift-gitops
   namespace: openshift-gitops
 spec:
+  extraConfig:
+    ui.bannercontent: Banner message linked to a URL
+    ui.bannerpermanent: 'true'
+    ui.bannerposition: top
+    ui.bannerurl: www.bannerlink.com
   applicationInstanceLabelKey: argocd.argoproj.io/instance
   controller:
     logLevel: info
