@@ -1,0 +1,19 @@
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: keycloak
+  namespace: keycloak  
+spec:
+  to:
+    kind: Service
+    name: keycloak-service
+  tls:
+    termination: passthrough
+    insecureEdgeTerminationPolicy: Redirect
+    certificate: ''
+    key: ''
+    caCertificate: ''
+    destinationCACertificate: ''
+  port:
+    targetPort: https
