@@ -4,7 +4,7 @@ default:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
     enabled: true
-    enableAutoSync: false
+    enableAutoSync: false  # temporary 
     autoSyncPrune: false
     project: cluster-config
     destination:
@@ -13,6 +13,14 @@ default:
     source:
       repoURL: git@github.com:Yantra-Vinyasa/multi-cluster-configs.git
       targetRevision: main
+    syncOptions:
+    - ApplyOutOfSyncOnly=true
+    - PrunePropagationPolicy=foreground
+    - PruneLast=true
+    - ServerSideApply=true  
+    - FailOnSharedResource=true
+    - RespectIgnoreDifferences=true
+    - CreateNamespace=false     
 
 projects:
   cluster-config:
