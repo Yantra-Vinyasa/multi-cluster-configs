@@ -1,0 +1,26 @@
+ARG KUSTOMIZE_VERSION=5.4.1
+
+FROM python:3.12.3-alpine3.19
+
+RUN apk add --no-cache \
+    git \
+    bash \
+    openssh-client \
+    grep \
+    coreutils \
+    idn2-utils \
+    curl \
+    go \
+    helm
+
+# Install kustomize
+RUN curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | \
+    bash -s -- ${KUSTOMIZE_VERSION} \
+    && mv kustomize /usr/local/bin/
+
+# Install yamllint
+RUN python3 -m pip install --user yamllint \
+    && mv /root/.local/bin/yamllint /usr/local/bin/
+
+CMD ["/bin/bash"]
+

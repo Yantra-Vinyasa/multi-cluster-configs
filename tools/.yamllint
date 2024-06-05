@@ -1,0 +1,42 @@
+---
+extends: default
+
+yaml-files:
+  - "*.yaml"
+  - "*.yml"
+  - ".yamllint"
+
+ignore: |
+  .github
+  base/argocd-app-of-app
+
+rules:
+  comments:
+    require-starting-space: true
+    ignore-shebangs: true
+    min-spaces-from-content: 2
+  document-start:
+    level: warning
+  braces: enable
+  brackets:
+    level: warning
+    max-spaces-inside: 1
+  indentation:
+    indent-sequences: true
+    spaces: 2
+    level: warning
+  empty-lines:
+    max: 2
+    max-start: 0
+    max-end: 1
+  truthy:
+    level: warning
+  line-length:
+    max: 500
+    level: warning
+    allow-non-breakable-words: true
+  new-line-at-end-of-file:
+    level: warning
+  trailing-spaces:
+    level: warning
+
