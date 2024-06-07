@@ -1,5 +1,6 @@
 ---
   name: Validate-YAML
+  run-name: Pipeline run by @${{ github.actor }}
 
   on:
     pull_request:
