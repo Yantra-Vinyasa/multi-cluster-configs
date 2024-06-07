@@ -1,0 +1,13 @@
+matrix:
+- name: Markdown
+  aspell:
+    lang: en
+  dictionary:
+    wordlists:
+    - .github/wordlist-md # <-- put path to custom dictionary file here
+    encoding: utf-8
+  pipeline:
+  - pyspelling.filters.markdown:
+  sources:
+  - '**/*.md'
+  default_encoding: utf-8
