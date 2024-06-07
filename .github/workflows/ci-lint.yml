@@ -1,0 +1,15 @@
+---
+  name: Validate-YAML
+
+  on:
+    pull_request:
+      branches: [main]
+
+  jobs:
+    validate-yaml:
+      steps:
+        - uses: actions/checkout@v3
+        - name: Show yamllint version
+          run: yamllint --version
+        - name: Run lint
+          run: yamllint .
