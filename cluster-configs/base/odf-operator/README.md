@@ -170,3 +170,5 @@ This pod can be used to check the status of Ceph cluster using its internal CLI.
 [OCS/ODF Installation and Configuration Training](https://red-hat-storage.github.io/ocs-training/training/index.html)
 
 [How to configure Ceph toolbox in OpenShift Data Foundation 4.x ](https://access.redhat.com/articles/4628891)
+
+[Supported configurations for Red Hat OpenShift Data Foundation 4.X](https://access.redhat.com/articles/5001441)
