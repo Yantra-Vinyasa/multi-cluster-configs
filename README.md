@@ -21,6 +21,6 @@ Configuring a new cluster (e.g. here dev cluster ) requires the execution of the
 kustomize build bootstrap/overlays/dev/gitops-operator | oc apply -f - 
 ```
 
-2. Install the Sealed Secret controller if used
+2. Install the either Sealed Secret controller or external-secrets-operator 
 
  
