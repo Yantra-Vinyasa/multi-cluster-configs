@@ -1,1 +1,26 @@
 # multi-cluster-configs
+
+## Top level directories:
+
+* bootstrap: Contains configuration for bootstrapping the GitOps System.
+
+* cluster-configs/base: Components that need to be installed or configured in the cluster.
+
+* cluster-configs/overlay: Selects components to be installed into the cluster.
+
+* tools : Helper scripts (e.g. setting up CI for gitlab & linting ).
+
+
+### Bootstrap process
+
+Configuring a new cluster (e.g. here dev cluster ) requires the execution of the following commands :
+
+1. Install the OpenShift GitOps Operator
+
+```
+kustomize build bootstrap/overlays/dev/gitops-operator | oc apply -f - 
+```
+
+2. Install the Sealed Secret controller if used
+
+ 
