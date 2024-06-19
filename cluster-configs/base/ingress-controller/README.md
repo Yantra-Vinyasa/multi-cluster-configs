@@ -1,9 +1,14 @@
-# Ingress
+# Ingress-Controller 
 The ingress certificate (also known as wildcard) is managed by the ingress Operator. The operator uses the certificate through the IngressController CR. The IngressController requires a TLS _secret_ with the certificate and its corresponding key in the `openshift-ingress` _namespace_.
 
-## Resources managed
-- resources/ingresscontrl.yaml
-- resources/vault-ingress-secret # Example secret
+## Key Capabilitis 
+
+* Manages the namespace: openshift-ingress and deploys cluster resource: router-default pods
+* Defines pod placement on specific nodes
+* Defines ROUTE and NAMESPACE affinity 
+* Defines replicas of router deployment
+* Defines the DOMAIN for haproxy handling if not default
+* Defines thread count for deployed router pods
 
 ## Verification
 Run this command to verify that the certificate was successfully added.
