@@ -5,8 +5,8 @@ This component provides compliance scanning based on selectable set of rules.
 ## Useful commands
 
 ```
-oc get compliancescan
-oc get pods
+oc get suites,scan -n openshift-compliance
+oc get pods -n openshift-compliance
 ```
 
 ## Links of interest
