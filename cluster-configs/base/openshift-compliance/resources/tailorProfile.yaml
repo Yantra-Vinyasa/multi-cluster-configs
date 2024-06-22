@@ -1,0 +1,14 @@
+---
+apiVersion: compliance.openshift.io/v1alpha1
+kind: TailoredProfile
+metadata:
+  name: ocp4-cis-additional-scc
+  namespace: openshift-compliance
+spec:
+  extends: ocp4-cis
+  title: Modified CIS allowing one more SCC
+  description: Allows an additional scc
+  setValues:
+  - name: ocp4-var-sccs-with-allowed-capabilities-regex
+    rationale: Allow our own custom SCC
+    value: ^privileged$|^hostnetwork-v2$|^restricted-v2$|^nonroot-v2$|^additional$|^twistlock-scc$|^noobaa$|^noobaa-endpoint$|^rook-ceph-csi$|^twistlock-console$
