@@ -11,6 +11,9 @@
 * tools : Helper scripts (e.g. setting up CI for gitlab & linting ).
 
 
+### GitOps
+[What is GitOps](https://opengitops.dev/)
+
 ### Bootstrap process
 
 Configuring a new cluster (e.g. here dev cluster ) requires the execution of the following commands :
