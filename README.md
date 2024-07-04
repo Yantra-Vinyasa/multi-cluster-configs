@@ -11,10 +11,11 @@
 * tools : Helper scripts (e.g. setting up CI for gitlab & linting ).
 
 
-### GitOps
-[What is GitOps](https://opengitops.dev/)
-
-### Bootstrap process
+### GitOps:
+* [What is GitOps](https://opengitops.dev/)
+* [App of Apps pattern](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/)
+  
+### Bootstrap process:
 
 Configuring a new cluster (e.g. here dev cluster ) requires the execution of the following commands :
 
