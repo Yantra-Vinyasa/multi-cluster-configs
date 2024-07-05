@@ -1,17 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: appofapp
+  name: appofapps
   namespace: openshift-gitops
 spec:
   destination:
+    name: ''
     namespace: openshift-gitops
-    server: https://kubernetes.default.svc
-  project: default
+    server: 'https://kubernetes.default.svc'
   source:
-    path: cluster-configs/overlays/dev/app-factory
-    repoURL: git@github.com:Yantra-Vinyasa/multi-cluster-configs.git
+    path: cluster-configs/overlay/dev/app-factory
+    repoURL: 'https://github.com/Yantra-Vinyasa/multi-cluster-configs.git'
     targetRevision: main
+  sources: []
+  project: default
   syncPolicy:
     automated:
       prune: false
