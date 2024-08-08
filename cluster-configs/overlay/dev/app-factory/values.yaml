@@ -11,7 +11,7 @@ default:
       namespace: openshift-gitops
       server: https://kubernetes.default.svc
     source:
-      repoURL: git@github.com:Yantra-Vinyasa/multi-cluster-configs.git
+      repoURL: https://github.com/Yantra-Vinyasa/multi-cluster-configs.git
       targetRevision: main
     syncOptions:
     - ApplyOutOfSyncOnly=true
@@ -35,7 +35,7 @@ projects:
     description: Project for overall cluster configuration
     namespace: openshift-gitops
     sourceRepos:
-    - git@github.com:Yantra-Vinyasa/multi-cluster-configs.git
+    - https://github.com/Yantra-Vinyasa/multi-cluster-configs.git
     destinations: |
       - namespace: '*'
         server: https://kubernetes.default.svc
