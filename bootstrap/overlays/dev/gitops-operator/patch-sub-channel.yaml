@@ -1,4 +1,4 @@
 ---
 - op: replace
   path: /spec/channel
-  value: gitops-1.11
+  value: gitops-1.13
