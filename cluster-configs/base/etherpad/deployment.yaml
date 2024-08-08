@@ -1,0 +1,107 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: etherpad
+  name: etherpad
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: etherpad
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/name: etherpad
+    spec:
+      containers:
+      - env:
+        - name: TITLE
+          value: DO380 - production etherpad
+        - name: DEFAULT_PAD_TEXT
+          value: Add some content and write your ideas
+        - name: SUPPRESS_ERRORS_IN_PAD_TEXT
+          value: "true"
+        - name: EXPOSE_VERSION
+          value: "true"
+        image: image-registry.openshift-image-registry.svc:5000/production/etherpad:1.8.18
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: http
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: etherpad
+        ports:
+        - containerPort: 9001
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: http
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /opt/etherpad-lite/var
+          name: etherpad-data
+      dnsPolicy: ClusterFirst
+      initContainers:
+      - args:
+        - |
+          if [ -f var/dirty.db ]; then
+            grep -aE "^{" var/dirty.db | grep -av sessionstorage > /tmp/dirty.db
+            mv /tmp/dirty.db var/dirty.db
+          fi
+        command:
+        - /bin/bash
+        - -c
+        image: image-registry.openshift-image-registry.svc:5000/production/etherpad:1.8.18
+        imagePullPolicy: IfNotPresent
+        name: clean
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /opt/etherpad-lite/var
+          name: etherpad-data
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: etherpad-data
+        persistentVolumeClaim:
+          claimName: etherpad
