@@ -9,7 +9,7 @@ spec:
     namespace: openshift-gitops
     server: 'https://kubernetes.default.svc'
   source:
-    path: cluster-configs/overlay/dev/app-factory
+    path: cluster-configs/overlays/dev/app-factory
     repoURL: 'https://github.com/Yantra-Vinyasa/multi-cluster-configs.git'
     targetRevision: main
   sources: []
