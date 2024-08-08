@@ -1,4 +1,4 @@
-# Openshift Data Foundation
+# Openshift Compliance Operator
 This component provides compliance scanning based on selectable set of rules.
  
 
