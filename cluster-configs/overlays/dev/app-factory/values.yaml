@@ -85,3 +85,9 @@ applications:
           kind: ConfigMap
           jsonPointers:
           - /data
+
+  web-terminal-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: '20'
+    source:
+      path: cluster-configs/overlays/dev/web-terminal-operator
