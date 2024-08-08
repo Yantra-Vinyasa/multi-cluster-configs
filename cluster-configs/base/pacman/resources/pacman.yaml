@@ -29,10 +29,17 @@ metadata:
   labels:
     app.kubernetes.io/name: pacman
 spec:
-  path: "/"
+  path: /
   to:
     kind: Service
     name: pacman
+    weight: 100
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Allow
+  wildcardPolicy: None
 ---
 apiVersion: v1
 kind: Service
