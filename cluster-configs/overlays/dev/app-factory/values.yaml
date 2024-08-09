@@ -91,3 +91,9 @@ applications:
       argocd.argoproj.io/sync-wave: '20'
     source:
       path: cluster-configs/overlays/dev/web-terminal-operator
+
+  etherpad:
+    annotations:
+      argocd.argoproj.io/sync-wave: '30'
+    source:
+      path: cluster-configs/overlays/dev/etherpad
