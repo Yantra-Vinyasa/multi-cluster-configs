@@ -33,7 +33,7 @@ spec:
           value: "true"
         - name: EXPOSE_VERSION
           value: "true"
-        image: image-registry.openshift-image-registry.svc:5000/production/etherpad:1.8.18
+        image: etherpad/etherpad:latest
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
