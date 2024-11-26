@@ -97,3 +97,9 @@ applications:
       argocd.argoproj.io/sync-wave: '30'
     source:
       path: cluster-configs/overlays/dev/etherpad
+
+  nfd:
+    annotations:
+      argocd.argoproj.io/sync-wave: '40'
+    source:
+      path: cluster-configs/overlays/dev/nfd
