@@ -1,0 +1,16 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - "../../../base/openshift-ai/"
+
+
+components:
+  - components/notebook-pod-sizes
+
+patches:
+  - target:
+      kind: Subscription
+      name: rhods-operator
+    path: patch-channel.yaml

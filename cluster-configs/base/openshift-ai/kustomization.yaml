@@ -11,6 +11,3 @@ resources:
   - instance/dsc-init.yaml
   - instance/namespace.yaml
   - instance/odhdashboardconfig.yaml
-
-components:
-  - instance/components/auth-with-authorino
