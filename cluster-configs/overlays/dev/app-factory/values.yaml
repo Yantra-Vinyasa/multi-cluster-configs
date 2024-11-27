@@ -98,8 +98,32 @@ applications:
     source:
       path: cluster-configs/overlays/dev/etherpad
 
-  nfd:
+  openshift-servicemesh:
     annotations:
       argocd.argoproj.io/sync-wave: '40'
     source:
+      path: cluster-configs/overlays/dev/openshift-servicemesh
+
+  openshift-serverless:
+    annotations:
+      argocd.argoproj.io/sync-wave: '50'
+    source:
+      path: cluster-configs/overlays/dev/openshift-serverless
+
+  nfd:
+    annotations:
+      argocd.argoproj.io/sync-wave: '60'
+    source:
       path: cluster-configs/overlays/dev/nfd
+
+  gpu-operator-certified:
+    annotations:
+      argocd.argoproj.io/sync-wave: '70'
+    source:
+      path: cluster-configs/overlays/dev/gpu-operator-certified
+
+  authorino-operator:
+    annotations:
+      argocd.argoproj.io/sync-wave: '80'
+    source:
+      path: cluster-configs/overlays/dev/authorino-operator
