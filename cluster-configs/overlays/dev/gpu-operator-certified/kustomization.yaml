@@ -4,6 +4,10 @@ kind: Kustomization
 resources:
   - "../../../base/gpu-operator-certified/"
   
+
+components:
+  - components/mig-single
+
 patches:
   - target:
       kind: Subscription
