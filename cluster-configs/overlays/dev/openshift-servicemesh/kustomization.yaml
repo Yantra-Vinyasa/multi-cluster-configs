@@ -15,3 +15,12 @@ patches:
       name: servicemeshoperator
       namespace: openshift-operators
       version: v1alpha1
+
+# Removing the smcp resource from the base
+  - patch: |-
+      $patch: delete
+      apiVersion: maistra.io/v2
+      kind: ServiceMeshControlPlane
+      metadata:
+        name: istio-system
+        namespace: istio-system
