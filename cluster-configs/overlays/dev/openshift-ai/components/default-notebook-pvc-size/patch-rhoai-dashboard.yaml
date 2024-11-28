@@ -4,4 +4,6 @@ metadata:
   name: odh-dashboard-config
 spec:
   notebookController:
+    enabled: true
+    notebookNamespace: rhods-notebooks
     pvcSize: 20Gi
